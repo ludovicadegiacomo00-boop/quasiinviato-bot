@@ -7,7 +7,7 @@
     "caption": "Benvenuta, benvenuto. Qual è l'ultimo messaggio che hai cancellato?\n.\n#frasi #frasibelle #pensieri #overthinking #quasiinviato",
     "publish_at": "2026-11-01T22:00:00+01:00",
     "status": "queued",
-    "last_error": "Errore Instagram 400: {\"error\":{\"message\":\"Invalid OAuth access token - Cannot parse access token\",\"type\":\"OAuthException\",\"code\":190,\"fbtrace_id\":\"A4h39ns1tGy5-vcTTKGry_H\"}}"
+    "last_error": "Errore Instagram 400: {\"error\":{\"message\":\"Unsupported post request. Object with ID 'EAAsywlU0An0BSy0vukWymbbQ1YaHuny3PJ91BiQdT8QmNAATpir32vIdZAmel7jkPOInkVP6zLUivy1w8KA1JM5Sv6w44wENIGD0RkE7qpTZBU945MVZA1cTw8x9qQsWgVZBUOcFeO1qfxXebFjZBq9urVgx4wkHj8DwGooTyN5RehOUZBeRArVc1Osgv35FDkeF5jNjRsTr5ZBBPB3tKTz5tXvPPhMKn8pgmOgWSsZD' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\\/\\/developers.facebook.com\\/d"
   },
   {
     "id": "post-002",
