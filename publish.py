@@ -50,7 +50,8 @@ def publish(post, user_id, token, base_url):
     caption = post.get("caption", "")
     auth = {"access_token": token}
     if t == "story":
-        cid = call(f"{user_id}/media", {"media_type": "STORIES", "image_url": urls[0], **auth})["id"]
+        key = "video_url" if urls[0].endswith(".mp4") else "image_url"
+        cid = call(f"{user_id}/media", {"media_type": "STORIES", key: urls[0], **auth})["id"]
     elif t == "reel":
         cid = call(f"{user_id}/media", {"media_type": "REELS", "video_url": urls[0], "caption": caption,
                                         "share_to_feed": "true", **auth})["id"]
@@ -64,7 +65,7 @@ def publish(post, user_id, token, base_url):
                                         "caption": caption, **auth})["id"]
     else:
         cid = call(f"{user_id}/media", {"image_url": urls[0], "caption": caption, **auth})["id"]
-    wait_ready(cid, token, tries=60 if t == "reel" else 24)
+    wait_ready(cid, token, tries=60 if urls[0].endswith(".mp4") else 24)
     if os.environ.get("PROVA"):
         return "prova-ok"
     return call(f"{user_id}/media_publish", {"creation_id": cid, **auth})["id"]
@@ -80,9 +81,13 @@ def main():
     with open(path, encoding="utf-8") as f:
         posts = json.load(f)
     now = datetime.now(timezone.utc)
+    due_file = os.path.join(HERE, ".due")
+    due_ids = set(open(due_file).read().split(",")) if os.path.exists(due_file) else None
     done, failed = 0, 0
     for p in sorted(posts, key=lambda p: p["publish_at"]):
         prova = [x for x in os.environ.get("PROVA", "").split(",") if x]
+        if due_ids is not None and p["id"] not in due_ids:
+            continue  # pubblichiamo solo ciò che render.py ha appena preparato
         if prova:
             if p["id"] not in prova:
                 continue

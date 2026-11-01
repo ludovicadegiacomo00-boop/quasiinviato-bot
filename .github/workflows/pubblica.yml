@@ -2,7 +2,7 @@ name: Pubblica su Instagram
 
 on:
   schedule:
-    - cron: "*/30 * * * *"   # ogni 30 minuti controlla se c'è un post da pubblicare
+    - cron: "*/10 * * * *"   # ogni 10 minuti controlla se c'è un post da pubblicare
   workflow_dispatch:
     inputs:
       prova:
@@ -49,13 +49,14 @@ jobs:
         if: steps.due.outputs.count != '0'
         env:
           IG_HANDLE: ${{ vars.IG_HANDLE }}
+          PROVA: ${{ github.event.inputs.prova }}
         run: |
-          pip install --quiet pillow
+          pip install --quiet pillow numpy
           command -v ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
-          python3 render.py
+          python3 render.py --due
           git config user.name "quasiinviato-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add images
+          git add images posts.json
           git diff --cached --quiet || git commit -m "Immagini dei post in uscita"
           git push
 
