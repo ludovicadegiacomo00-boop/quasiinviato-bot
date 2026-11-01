@@ -62,7 +62,7 @@ def layout(words, size, max_w):
     return lines, reg, ita, space
 
 
-def render(post, out_path):
+def render(post, out_path, counter=None):
     night = post.get("theme") == "night"
     bg, fg = (NERO, CREMA) if night else (CREMA, NERO)
     img = Image.new("RGB", (W, H), bg)
@@ -88,6 +88,8 @@ def render(post, out_path):
     small = font("sans", 30)
     if post.get("time_label"):
         d.text((64, 56), post["time_label"], font=small, fill=GRIGIO)
+    if counter:
+        d.text((W - 64 - small.getlength(counter), 56), counter, font=small, fill=GRIGIO)
 
     cy, r, gap = H - 150, 9, 34
     for i, color in enumerate([GRIGIO, GRIGIO, ARANCIO]):
@@ -100,6 +102,13 @@ def render(post, out_path):
     img.save(out_path, "PNG")
 
 
+def image_files(post):
+    """Nomi delle immagini di un post: una per i post singoli, una per slide nei caroselli."""
+    if post.get("slides"):
+        return [f"{post['id']}-{i + 1}.png" for i in range(len(post["slides"]))]
+    return [f"{post['id']}.png"]
+
+
 def main():
     with open(os.path.join(HERE, "posts.json"), encoding="utf-8") as f:
         posts = json.load(f)
@@ -108,11 +117,18 @@ def main():
     for p in posts:
         if only and p["id"] not in only:
             continue
-        path = os.path.join(HERE, "images", f"{p['id']}.png")
-        if p.get("status") == "published" and os.path.exists(path):
+        if p.get("status") == "published":
             continue
-        render(p, path)
-        print("creata", path)
+        files = image_files(p)
+        if p.get("slides"):
+            n = len(p["slides"])
+            for i, (text, name) in enumerate(zip(p["slides"], files)):
+                slide = dict(p, text=text, time_label=p.get("time_label") if i == 0 else None)
+                render(slide, os.path.join(HERE, "images", name), counter=f"{i + 1}/{n}")
+                print("creata", name)
+        else:
+            render(p, os.path.join(HERE, "images", files[0]))
+            print("creata", files[0])
 
 
 if __name__ == "__main__":

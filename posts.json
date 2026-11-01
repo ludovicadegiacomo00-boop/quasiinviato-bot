@@ -5,7 +5,7 @@
     "theme": "day",
     "time_label": "21:00",
     "caption": "Benvenuta, benvenuto. Qual è l'ultimo messaggio che hai cancellato?\n.\n#frasi #frasibelle #pensieri #overthinking #quasiinviato",
-    "publish_at": "2026-11-10T13:00:00+01:00",
+    "publish_at": "2026-11-01T22:00:00+01:00",
     "status": "queued"
   },
   {
@@ -78,6 +78,23 @@
     "time_label": "20:30",
     "caption": "Io, puntata 1.\n.\n#frasi #frasibelle #pensieri #overthinking #quasiinviato",
     "publish_at": "2026-11-15T21:00:00+01:00",
+    "status": "queued"
+  },
+  {
+    "id": "post-010",
+    "theme": "day",
+    "time_label": "08:30",
+    "slides": [
+      "5 cose che ho *capito* a 25 anni",
+      "Chi ti cerca solo quando ha bisogno non ti sta *cercando.*",
+      "Non devi rispondere *subito.* Nemmeno a chi aspetta.",
+      "“Sto bene” non è una risposta. È una porta *chiusa.*",
+      "Le amicizie finiscono anche senza *litigare.*",
+      "Dormire è una *decisione.* Anche quando il telefono dice il contrario.",
+      "Salvala per quando *serve.*"
+    ],
+    "caption": "Capito tardi, puntata 1. Quale ti è arrivata di più?\n.\n#frasi #frasibelle #pensieri #crescitapersonale #quasiinviato",
+    "publish_at": "2026-11-16T21:00:00+01:00",
     "status": "queued"
   }
 ]

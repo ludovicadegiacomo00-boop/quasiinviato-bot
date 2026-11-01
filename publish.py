@@ -13,6 +13,8 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 
+from render import image_files
+
 API = "https://graph.facebook.com/v21.0"
 HERE = os.path.dirname(os.path.abspath(__file__))
 MAX_PER_RUN = 3
@@ -31,18 +33,33 @@ def call(path, params, method="POST"):
         raise RuntimeError(f"Errore Instagram {e.code}: {e.read().decode()}") from None
 
 
-def publish(post, user_id, token, base_url):
-    image_url = f"{base_url}/{post['id']}.png"
-    c = call(f"{user_id}/media", {"image_url": image_url, "caption": post.get("caption", ""),
-                                  "access_token": token})
-    cid = c["id"]
-    for _ in range(20):
+def wait_ready(cid, token):
+    for _ in range(24):
         s = call(cid, {"fields": "status_code", "access_token": token}, method="GET")
         if s.get("status_code") == "FINISHED":
-            break
+            return
         if s.get("status_code") == "ERROR":
-            raise RuntimeError(f"Instagram non ha accettato l'immagine {image_url}")
+            raise RuntimeError(f"Instagram non ha accettato il contenuto {cid}")
         time.sleep(5)
+    raise RuntimeError(f"Instagram non ha finito di elaborare {cid}")
+
+
+def publish(post, user_id, token, base_url):
+    urls = [f"{base_url}/{name}" for name in image_files(post)]
+    caption = post.get("caption", "")
+    if len(urls) == 1:
+        cid = call(f"{user_id}/media", {"image_url": urls[0], "caption": caption,
+                                        "access_token": token})["id"]
+    else:
+        children = []
+        for url in urls[:10]:  # Instagram accetta al massimo 10 slide
+            child = call(f"{user_id}/media", {"image_url": url, "is_carousel_item": "true",
+                                              "access_token": token})["id"]
+            wait_ready(child, token)
+            children.append(child)
+        cid = call(f"{user_id}/media", {"media_type": "CAROUSEL", "children": ",".join(children),
+                                        "caption": caption, "access_token": token})["id"]
+    wait_ready(cid, token)
     return call(f"{user_id}/media_publish", {"creation_id": cid, "access_token": token})["id"]
 
 
