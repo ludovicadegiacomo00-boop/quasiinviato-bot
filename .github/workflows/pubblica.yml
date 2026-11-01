@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "*/30 * * * *"   # ogni 30 minuti controlla se c'è un post da pubblicare
   workflow_dispatch:
+    inputs:
+      prova:
+        description: "Id dei post da provare senza pubblicarli (separati da virgola)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -20,11 +25,15 @@ jobs:
 
       - name: Controlla se ci sono post da pubblicare
         id: due
+        env:
+          PROVA: ${{ github.event.inputs.prova }}
         run: |
           python3 - <<'PY' >> "$GITHUB_OUTPUT"
           import json; from datetime import datetime, timezone
           now = datetime.now(timezone.utc)
           due = [p for p in json.load(open("posts.json")) if p.get("status") == "queued" and datetime.fromisoformat(p["publish_at"]) <= now]
+          import os
+          if os.environ.get("PROVA"): due = [1]
           print(f"count={len(due)}")
           PY
 
@@ -42,6 +51,7 @@ jobs:
           IG_HANDLE: ${{ vars.IG_HANDLE }}
         run: |
           pip install --quiet pillow
+          command -v ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
           python3 render.py
           git config user.name "quasiinviato-bot"
           git config user.email "bot@users.noreply.github.com"
@@ -54,6 +64,7 @@ jobs:
         env:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          PROVA: ${{ github.event.inputs.prova }}
         run: |
           export IMAGE_BASE_URL="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/$(git rev-parse HEAD)/images"
           python3 publish.py

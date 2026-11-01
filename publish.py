@@ -13,7 +13,7 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 
-from render import image_files
+from render import media_files
 
 API = "https://graph.facebook.com/v21.0"
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -33,8 +33,8 @@ def call(path, params, method="POST"):
         raise RuntimeError(f"Errore Instagram {e.code}: {e.read().decode()}") from None
 
 
-def wait_ready(cid, token):
-    for _ in range(24):
+def wait_ready(cid, token, tries=24):
+    for _ in range(tries):
         s = call(cid, {"fields": "status_code", "access_token": token}, method="GET")
         if s.get("status_code") == "FINISHED":
             return
@@ -45,22 +45,29 @@ def wait_ready(cid, token):
 
 
 def publish(post, user_id, token, base_url):
-    urls = [f"{base_url}/{name}" for name in image_files(post)]
+    t = post.get("type") or ("carousel" if post.get("slides") else "post")
+    urls = [f"{base_url}/{name}" for name in media_files(post)]
     caption = post.get("caption", "")
-    if len(urls) == 1:
-        cid = call(f"{user_id}/media", {"image_url": urls[0], "caption": caption,
-                                        "access_token": token})["id"]
-    else:
+    auth = {"access_token": token}
+    if t == "story":
+        cid = call(f"{user_id}/media", {"media_type": "STORIES", "image_url": urls[0], **auth})["id"]
+    elif t == "reel":
+        cid = call(f"{user_id}/media", {"media_type": "REELS", "video_url": urls[0], "caption": caption,
+                                        "share_to_feed": "true", **auth})["id"]
+    elif t == "carousel":
         children = []
         for url in urls[:10]:  # Instagram accetta al massimo 10 slide
-            child = call(f"{user_id}/media", {"image_url": url, "is_carousel_item": "true",
-                                              "access_token": token})["id"]
+            child = call(f"{user_id}/media", {"image_url": url, "is_carousel_item": "true", **auth})["id"]
             wait_ready(child, token)
             children.append(child)
         cid = call(f"{user_id}/media", {"media_type": "CAROUSEL", "children": ",".join(children),
-                                        "caption": caption, "access_token": token})["id"]
-    wait_ready(cid, token)
-    return call(f"{user_id}/media_publish", {"creation_id": cid, "access_token": token})["id"]
+                                        "caption": caption, **auth})["id"]
+    else:
+        cid = call(f"{user_id}/media", {"image_url": urls[0], "caption": caption, **auth})["id"]
+    wait_ready(cid, token, tries=60 if t == "reel" else 24)
+    if os.environ.get("PROVA"):
+        return "prova-ok"
+    return call(f"{user_id}/media_publish", {"creation_id": cid, **auth})["id"]
 
 
 def main():
@@ -75,12 +82,20 @@ def main():
     now = datetime.now(timezone.utc)
     done, failed = 0, 0
     for p in sorted(posts, key=lambda p: p["publish_at"]):
-        if p.get("status") != "queued" or datetime.fromisoformat(p["publish_at"]) > now:
+        prova = [x for x in os.environ.get("PROVA", "").split(",") if x]
+        if prova:
+            if p["id"] not in prova:
+                continue
+        elif p.get("status") != "queued" or datetime.fromisoformat(p["publish_at"]) > now:
             continue
         if done >= MAX_PER_RUN:
             break
         try:
             p["media_id"] = publish(p, user_id, token, base)
+            if os.environ.get("PROVA"):
+                p.pop("media_id")
+                print("prova riuscita, non pubblicato:", p["id"])
+                continue
             p["status"] = "published"
             p["published_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
             done += 1

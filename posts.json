@@ -11,6 +11,15 @@
     "published_at": "2026-11-01T22:32:18+00:00"
   },
   {
+    "id": "story-001",
+    "type": "story",
+    "theme": "day",
+    "time_label": "10:00",
+    "text": "Benvenuti su Quasi inviato. Qui finiscono i messaggi che non abbiamo avuto il coraggio di *mandare.*",
+    "publish_at": "2026-11-02T10:00:00+01:00",
+    "status": "queued"
+  },
+  {
     "id": "post-002",
     "text": "Sto scrivendo da dieci minuti. Ti mando solo *ok.*",
     "theme": "night",
@@ -46,6 +55,15 @@
     "status": "queued"
   },
   {
+    "id": "story-002",
+    "type": "story",
+    "theme": "day",
+    "time_label": "10:00",
+    "text": "L'ultima cosa che hai scritto e non hai *mandato* è… Rispondi a questa storia.",
+    "publish_at": "2026-11-03T10:00:00+01:00",
+    "status": "queued"
+  },
+  {
     "id": "post-004",
     "text": "Mandala a chi conosce la versione di te che non *posti.*",
     "theme": "day",
@@ -73,6 +91,25 @@
     "status": "queued"
   },
   {
+    "id": "reel-001",
+    "type": "reel",
+    "theme": "night",
+    "time_label": "02:14",
+    "text": "Mi manchi. No. Mi manca come stavo quando *c'eri.*",
+    "caption": "Quasi inviato. A chi lo stavi scrivendo?\n.\n#frasi #frasibelle #pensieri #overthinking #quasiinviato",
+    "publish_at": "2026-11-03T23:00:00+01:00",
+    "status": "queued"
+  },
+  {
+    "id": "story-003",
+    "type": "story",
+    "theme": "night",
+    "time_label": "10:00",
+    "text": "Stasera alle 21:00 si parla di *notte.*",
+    "publish_at": "2026-11-04T10:00:00+01:00",
+    "status": "queued"
+  },
+  {
     "id": "post-007",
     "text": "Non sono *troppo.* Ero solo nel posto sbagliato.",
     "theme": "day",
@@ -97,6 +134,16 @@
     "time_label": "20:30",
     "caption": "Io, puntata 1.\n.\n#frasi #frasibelle #pensieri #overthinking #quasiinviato",
     "publish_at": "2026-11-04T21:00:00+01:00",
+    "status": "queued"
+  },
+  {
+    "id": "reel-002",
+    "type": "reel",
+    "theme": "night",
+    "time_label": "01:12",
+    "text": "Ti ho scritto *ciao* e l'ho cancellato tre volte.",
+    "caption": "Succede solo a me? 🤍\n.\n#frasi #frasibelle #pensieri #overthinking #quasiinviato",
+    "publish_at": "2026-11-04T23:00:00+01:00",
     "status": "queued"
   }
 ]
