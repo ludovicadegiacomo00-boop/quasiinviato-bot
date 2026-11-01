@@ -66,6 +66,8 @@ def publish(post, user_id, token, base_url):
 def main():
     user_id = os.environ["IG_USER_ID"].strip().strip("\"'")
     token = os.environ["IG_TOKEN"].strip().strip("\"'")
+    if not user_id.isdigit():
+        sys.exit("IG_USER_ID deve essere solo numeri (l'id dell'account Instagram), non il token.")
     base = os.environ["IMAGE_BASE_URL"]
     path = os.path.join(HERE, "posts.json")
     with open(path, encoding="utf-8") as f:
@@ -84,9 +86,10 @@ def main():
             done += 1
             print("pubblicato", p["id"])
         except Exception as e:  # il post resta in coda e viene riprovato
-            p["last_error"] = str(e)[:500]
+            msg = str(e).replace(token, "[TOKEN]").replace(user_id, "[ID]")
+            p["last_error"] = msg[:300]
             failed += 1
-            print("ERRORE", p["id"], e, file=sys.stderr)
+            print("ERRORE", p["id"], msg, file=sys.stderr)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(posts, f, ensure_ascii=False, indent=2)
         f.write("\n")
