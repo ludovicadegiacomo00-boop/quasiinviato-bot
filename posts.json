@@ -34,6 +34,40 @@
     "published_at": "2026-11-01T22:46:03+00:00"
   },
   {
+    "id": "reel-amicizia-1",
+    "type": "reel",
+    "theme": "night",
+    "text": "Ci sentiamo poco. Ma quando ci sentiamo è come se non fosse passato *un giorno.*",
+    "caption": "Non serve sentirsi tutti i giorni. Serve sentirsi così. 🤍\n\nGuarda fino alla fine: questo messaggio non è mai partito.\n\n📩 Mandalo a quell'amica che senti una volta al mese e ti sembra ieri.\n.\n.\n#amicizia #amiche #migliorEamica #frasiamicizia #frasi #quasiinviato",
+    "publish_at": "2026-11-02T00:05:00+01:00",
+    "status": "queued"
+  },
+  {
+    "id": "post-amicizia-1",
+    "text": "Le amicizie vere non si sentono tutti i giorni. Si sentono quando *serve.*",
+    "theme": "day",
+    "caption": "Non chi c'è sempre. Chi c'è quando conta. ✨\n\nQuante amicizie così hai? Scrivi il numero nei commenti 👇\n\n🏷️ Tagga la persona che c'era quando serviva.\n.\n.\n#amicizia #amiche #migliorEamica #frasiamicizia #frasi #quasiinviato",
+    "publish_at": "2026-11-02T00:05:00+01:00",
+    "status": "queued"
+  },
+  {
+    "id": "reel-amicizia-2",
+    "type": "reel",
+    "theme": "day",
+    "text": "Ti ho scritto “dobbiamo vederci” sei mesi fa. Lo pensavo *davvero.*",
+    "caption": "Il \"dobbiamo vederci\" più sincero e più rimandato della storia. 🫠\n\nÈ il momento di trasformarlo in una data.\n\n📩 Mandalo a chi devi vedere da troppo tempo. Adesso.\n.\n.\n#amicizia #amiche #migliorEamica #frasiamicizia #frasi #quasiinviato",
+    "publish_at": "2026-11-02T00:05:00+01:00",
+    "status": "queued"
+  },
+  {
+    "id": "story-amicizia-1",
+    "type": "story",
+    "theme": "night",
+    "text": "Tagga l'amica che sa tutto e non ha mai detto *niente.*",
+    "publish_at": "2026-11-02T00:05:00+01:00",
+    "status": "queued"
+  },
+  {
     "id": "post-002",
     "text": "Sto scrivendo da dieci minuti. Ti mando solo *ok.*",
     "theme": "night",

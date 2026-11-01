@@ -17,7 +17,7 @@ from render import media_files
 
 API = "https://graph.facebook.com/v21.0"
 HERE = os.path.dirname(os.path.abspath(__file__))
-MAX_PER_RUN = 3
+MAX_PER_RUN = 5
 
 
 def call(path, params, method="POST"):
