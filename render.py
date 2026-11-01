@@ -251,6 +251,7 @@ def render_reel(post, out_path):
     for i in range(1, n + 1):                       # scrittura, 30 caratteri al secondo
         ch = plain(text)[i - 1]
         add(draw_frame(text, visible_chars=i, cursor=True, **kw), 1, None if ch == " " else "type")
+    post["thumb_offset"] = int(len(frames) / FPS * 1000) + 500  # copertina: la frase intera
     add(draw_frame(text, **kw), 45)                 # pausa per leggere
     for k in range(3):                              # "sta scrivendo..." che pulsa
         for lit in range(3):
@@ -328,13 +329,17 @@ def main():
     if "--due" in sys.argv:
         # L'orario sull'immagine è l'ora reale di uscita: lo scriviamo adesso, al momento della pubblicazione.
         todo = due_posts(posts)
+        # Griglia a scacchiera: ogni contenuto della griglia ha il fondo opposto al precedente.
+        grid = [p for p in posts if p.get("status") == "published" and p.get("type") != "story"]
+        last = max(grid, key=lambda p: p.get("published_at", ""), default=None)
+        next_theme = "day" if not last or last.get("theme") == "night" else "night"
+        for p in sorted(todo, key=lambda p: p["publish_at"]):
+            if p.get("type") != "story" and not p.get("keep_theme"):
+                p["theme"], next_theme = next_theme, ("night" if next_theme == "day" else "day")
         for p in todo:
             t = p.get("type") or ("carousel" if p.get("slides") else "post")
             delay = 3 if t == "reel" or (t == "story" and p.get("format") != "image") else 2 if t == "carousel" else 1
             p["time_label"] = (datetime.now(ROME) + timedelta(minutes=delay)).strftime("%H:%M")
-        with open(path, "w", encoding="utf-8") as f:
-            json.dump(posts, f, ensure_ascii=False, indent=2)
-            f.write("\n")
         with open(os.path.join(HERE, ".due"), "w") as f:
             f.write(",".join(p["id"] for p in todo))
     else:
@@ -344,6 +349,10 @@ def main():
     for p in todo:
         for out in render(p):
             print("creato", os.path.basename(out))
+    if "--due" in sys.argv:
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(posts, f, ensure_ascii=False, indent=2)
+            f.write("\n")
 
 
 if __name__ == "__main__":

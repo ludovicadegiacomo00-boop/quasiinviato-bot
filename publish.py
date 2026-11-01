@@ -55,7 +55,8 @@ def publish(post, user_id, token, base_url):
         cid = call(f"{user_id}/media", {"media_type": "STORIES", key: urls[0], **auth})["id"]
     elif t == "reel":
         cid = call(f"{user_id}/media", {"media_type": "REELS", "video_url": urls[0], "caption": caption,
-                                        "share_to_feed": "true", **auth})["id"]
+                                        "share_to_feed": "true", **({"thumb_offset": str(post["thumb_offset"])} if post.get("thumb_offset") else {}),
+                                        **auth})["id"]
     elif t == "carousel":
         children = []
         for url in urls[:10]:  # Instagram accetta al massimo 10 slide
