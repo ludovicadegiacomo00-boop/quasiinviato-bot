@@ -64,7 +64,9 @@ def publish(post, user_id, token, base_url):
 
 
 def main():
-    user_id, token, base = os.environ["IG_USER_ID"], os.environ["IG_TOKEN"], os.environ["IMAGE_BASE_URL"]
+    user_id = os.environ["IG_USER_ID"].strip().strip("\"'")
+    token = os.environ["IG_TOKEN"].strip().strip("\"'")
+    base = os.environ["IMAGE_BASE_URL"]
     path = os.path.join(HERE, "posts.json")
     with open(path, encoding="utf-8") as f:
         posts = json.load(f)
