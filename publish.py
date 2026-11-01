@@ -11,6 +11,7 @@ import sys
 import time
 import urllib.parse
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 
 from render import media_files
@@ -83,9 +84,9 @@ def main():
     now = datetime.now(timezone.utc)
     due_file = os.path.join(HERE, ".due")
     due_ids = set(open(due_file).read().split(",")) if os.path.exists(due_file) else None
-    done, failed = 0, 0
+    prova = [x for x in os.environ.get("PROVA", "").split(",") if x]
+    selected = []
     for p in sorted(posts, key=lambda p: p["publish_at"]):
-        prova = [x for x in os.environ.get("PROVA", "").split(",") if x]
         if due_ids is not None and p["id"] not in due_ids:
             continue  # pubblichiamo solo ciò che render.py ha appena preparato
         if prova:
@@ -93,23 +94,31 @@ def main():
                 continue
         elif p.get("status") != "queued" or datetime.fromisoformat(p["publish_at"]) > now:
             continue
-        if done >= MAX_PER_RUN:
-            break
+        selected.append(p)
+    selected = selected[:MAX_PER_RUN]
+
+    def one(p):
         try:
-            p["media_id"] = publish(p, user_id, token, base)
-            if os.environ.get("PROVA"):
-                p.pop("media_id")
-                print("prova riuscita, non pubblicato:", p["id"])
-                continue
-            p["status"] = "published"
-            p["published_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
-            done += 1
-            print("pubblicato", p["id"])
+            return p, publish(p, user_id, token, base), None
         except Exception as e:  # il post resta in coda e viene riprovato
-            msg = str(e).replace(token, "[TOKEN]").replace(user_id, "[ID]")
-            p["last_error"] = msg[:300]
-            failed += 1
-            print("ERRORE", p["id"], msg, file=sys.stderr)
+            return p, None, str(e).replace(token, "[TOKEN]").replace(user_id, "[ID]")
+
+    # In parallelo: così ogni contenuto esce all'ora scritta sull'immagine, senza aspettare gli altri.
+    done, failed = 0, 0
+    with ThreadPoolExecutor(max_workers=5) as pool:
+        for p, media_id, err in pool.map(one, selected):
+            if err:
+                p["last_error"] = err[:300]
+                failed += 1
+                print("ERRORE", p["id"], err, file=sys.stderr)
+            elif prova:
+                print("prova riuscita, non pubblicato:", p["id"])
+            else:
+                p.update(media_id=media_id, status="published",
+                         published_at=datetime.now(timezone.utc).isoformat(timespec="seconds"))
+                p.pop("last_error", None)
+                done += 1
+                print("pubblicato", p["id"])
     with open(path, "w", encoding="utf-8") as f:
         json.dump(posts, f, ensure_ascii=False, indent=2)
         f.write("\n")
