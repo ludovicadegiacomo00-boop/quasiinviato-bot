@@ -12,18 +12,35 @@ Dopo questi passaggi non devi più fare niente: chiedi a Claude "genera 10 post"
 2. Crea un repository **pubblico** chiamato `quasiinviato-bot` (deve essere pubblico perché Instagram scarica le immagini da lì).
 3. Dimmi il nome del repository: carico io i file.
 
-## 3. Meta for Developers (gratis)
-1. Vai su developers.facebook.com, accedi con il tuo Facebook e crea un'app di tipo "Business".
-2. Aggiungi il prodotto **Instagram** (API con accesso Facebook).
-3. Da "Graph API Explorer" genera un token con i permessi `instagram_basic`, `instagram_content_publish`, `pages_show_list`, `pages_read_engagement`, `business_management`.
-4. Trasformalo in token della Pagina (non scade). Ti guido io in chat su questo passaggio.
-5. Copia due valori: l'**id dell'account Instagram** e il **token della Pagina**.
+## 3. Meta for Developers (gratis, circa 15 minuti)
 
-## 4. Inserisci i due valori su GitHub
-Nel repository: Settings → Secrets and variables → Actions:
-- Secret `IG_USER_ID` = id dell'account Instagram
-- Secret `IG_TOKEN` = token della Pagina
-- Variable `IG_HANDLE` = il tuo handle, es. `@quasiinviato`
+**A. Crea l'app**
+1. Vai su developers.facebook.com, accedi con il tuo Facebook e clicca **Inizia** per registrarti come sviluppatrice (chiede di confermare email o telefono).
+2. Clicca **Le mie app**, poi **Crea app**. Nome: `quasiinviato-bot`.
+3. Come caso d'uso scegli **Altro**, poi tipo **Business**. Crea l'app.
+
+**B. Genera il token**
+1. Apri **Strumenti**, poi **Graph API Explorer** (developers.facebook.com/tools/explorer).
+2. A destra, in "App Meta", scegli `quasiinviato-bot`. In "Utente o Pagina" lascia **Token utente**.
+3. In "Autorizzazioni" aggiungi: `instagram_basic`, `instagram_content_publish`, `pages_show_list`, `pages_read_engagement`, `business_management`.
+4. Clicca **Generate Access Token** e, nella finestra di Facebook, autorizza la Pagina "Quasi inviato" e l'account Instagram.
+
+**C. Rendi il token permanente**
+1. Clicca l'icona (i) accanto al token, poi **Apri in Access Token Tool**.
+2. In fondo clicca **Estendi token di accesso** e copia il nuovo token lungo.
+3. Torna nel Graph API Explorer, incolla il token lungo nel campo "Token di accesso".
+4. Nella barra della richiesta scrivi `me/accounts?fields=name,access_token,instagram_business_account` e clicca **Invia**.
+5. Nel risultato, sotto "Quasi inviato", trovi:
+   - `access_token`: è il **token della Pagina** (non scade) → va in `IG_TOKEN`
+   - `instagram_business_account` → `id`: è l'**id dell'account Instagram** → va in `IG_USER_ID`
+
+Non incollare il token in chat: mettilo direttamente su GitHub (passo 4).
+
+## 4. Inserisci i valori su GitHub
+Nel repository `quasiinviato-bot`: **Settings**, poi **Secrets and variables**, poi **Actions**.
+- Scheda **Secrets**, **New repository secret**: nome `IG_USER_ID`, valore l'id dell'account Instagram.
+- Ancora **New repository secret**: nome `IG_TOKEN`, valore il token della Pagina.
+- Scheda **Variables**, **New repository variable**: nome `IG_HANDLE`, valore `@quasiinviato`.
 
 Fatto. Ogni 30 minuti GitHub controlla `posts.json` e pubblica i post arrivati alla loro ora.
 
