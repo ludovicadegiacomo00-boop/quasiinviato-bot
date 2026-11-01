@@ -80,6 +80,14 @@
     "published_at": "2026-11-01T23:09:19+00:00"
   },
   {
+    "id": "story-0211",
+    "type": "story",
+    "theme": "day",
+    "text": "Buongiorno. Oggi quel messaggio lo scrivi. O almeno *quasi.*",
+    "publish_at": "2026-11-02T10:00:00+01:00",
+    "status": "queued"
+  },
+  {
     "id": "post-002",
     "text": "Sto scrivendo da dieci minuti. Ti mando solo *ok.*",
     "theme": "night",
@@ -98,6 +106,14 @@
     "status": "queued"
   },
   {
+    "id": "reel-0211a",
+    "type": "reel",
+    "text": "Ho riletto la nostra chat. Ho sempre scritto io *per prima.*",
+    "caption": "Scorri la chat fino in fondo e te ne accorgi: eri sempre tu a cominciare. 🫠\n\nGuarda fino alla fine: questo non l'ho mandato.\n\n👇 Team \"scrivo io per prima\" o team \"aspetto\"?\n📩 Mandalo a chi deve leggerlo.\n.\n.\n#frasidamore #amore #mimanchi #frasi #frasibelle #quasiinviato",
+    "publish_at": "2026-11-02T19:30:00+01:00",
+    "status": "queued"
+  },
+  {
     "id": "post-010",
     "theme": "day",
     "time_label": "08:30",
@@ -112,6 +128,14 @@
     ],
     "caption": "5 lezioni che nessuno ti spiega. Le capisci solo quando è tardi. ⏳\n\nScorri fino all'ultima: è quella che fa più male.\nQuale ti è arrivata di più? Scrivi il numero 👇\n\n💾 Salvalo: un giorno ti servirà.\n.\n.\n#autostima #crescitapersonale #amorproprio #frasimotivazionali #quasiinviato #frasi",
     "publish_at": "2026-11-02T21:00:00+01:00",
+    "status": "queued"
+  },
+  {
+    "id": "reel-0211b",
+    "type": "reel",
+    "text": "Buonanotte a te che dici “non ci penso più” e ci pensi *ogni sera.*",
+    "caption": "\"Non ci penso più.\" Ore 23:00. Ci stai pensando. 🌙\n\nSe ti sei sentita chiamata in causa, salvalo e torna qui stanotte.\n\n💾 Salva · 📩 Manda a chi fa finta di niente\n.\n.\n#overthinking #pensierinotturni #buonanotte #frasi #frasivere #quasiinviato",
+    "publish_at": "2026-11-02T23:00:00+01:00",
     "status": "queued"
   },
   {
