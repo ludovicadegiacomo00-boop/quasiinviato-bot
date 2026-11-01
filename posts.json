@@ -17,7 +17,9 @@
     "time_label": "10:00",
     "text": "Benvenuti su Quasi inviato. Qui finiscono i messaggi che non abbiamo avuto il coraggio di *mandare.*",
     "publish_at": "2026-11-01T23:40:00+01:00",
-    "status": "queued"
+    "status": "published",
+    "media_id": "18347057812249881",
+    "published_at": "2026-11-01T22:45:30+00:00"
   },
   {
     "id": "reel-001",
@@ -27,7 +29,9 @@
     "text": "Mi manchi. No. Mi manca come stavo quando *c'eri.*",
     "caption": "Quasi inviato. A chi lo stavi scrivendo?\n.\n#frasi #frasibelle #pensieri #overthinking #quasiinviato",
     "publish_at": "2026-11-01T23:40:00+01:00",
-    "status": "queued"
+    "status": "published",
+    "media_id": "18340422571278618",
+    "published_at": "2026-11-01T22:46:03+00:00"
   },
   {
     "id": "post-002",
