@@ -1,0 +1,83 @@
+[
+  {
+    "id": "post-001",
+    "text": "Questo account è per tutti i messaggi che hai scritto e *cancellato.*",
+    "theme": "day",
+    "time_label": "21:00",
+    "caption": "Benvenuta, benvenuto. Qual è l'ultimo messaggio che hai cancellato?\n.\n#frasi #frasibelle #pensieri #overthinking #quasiinviato",
+    "publish_at": "2026-11-10T13:00:00+01:00",
+    "status": "queued"
+  },
+  {
+    "id": "post-002",
+    "text": "Sto scrivendo da dieci minuti. Ti mando solo *ok.*",
+    "theme": "night",
+    "time_label": "02:14",
+    "caption": "Succede anche a te? 🤍 Mandala a chi ti risponde sempre ok.\n.\n#frasi #frasibelle #pensieri #overthinking #quasiinviato",
+    "publish_at": "2026-11-10T21:00:00+01:00",
+    "status": "queued"
+  },
+  {
+    "id": "post-003",
+    "text": "Volevo dirti che ho ancora la tua felpa. In realtà volevo dirti di *tornare.*",
+    "theme": "night",
+    "time_label": "01:47",
+    "caption": "Mai inviati, puntata 1.\n.\n#frasi #frasibelle #pensieri #overthinking #quasiinviato",
+    "publish_at": "2026-11-11T13:00:00+01:00",
+    "status": "queued"
+  },
+  {
+    "id": "post-004",
+    "text": "Mandala a chi conosce la versione di te che non *posti.*",
+    "theme": "day",
+    "time_label": "19:05",
+    "caption": "Tagga quella persona.\n.\n#frasi #frasibelle #pensieri #overthinking #quasiinviato",
+    "publish_at": "2026-11-11T21:00:00+01:00",
+    "status": "queued"
+  },
+  {
+    "id": "post-005",
+    "text": "Sono le 3 e sto ripassando una conversazione del 2019. Come se potessi ancora *vincerla.*",
+    "theme": "night",
+    "time_label": "03:00",
+    "caption": "Pensieri delle 3:00.\n.\n#frasi #frasibelle #pensieri #overthinking #quasiinviato",
+    "publish_at": "2026-11-12T13:00:00+01:00",
+    "status": "queued"
+  },
+  {
+    "id": "post-006",
+    "text": "Ho visto che hai visualizzato. Va bene. Anch'io ho visualizzato tante cose che non mi andavano *bene.*",
+    "theme": "day",
+    "time_label": "23:12",
+    "caption": "Mai inviati.\n.\n#frasi #frasibelle #pensieri #overthinking #quasiinviato",
+    "publish_at": "2026-11-12T21:00:00+01:00",
+    "status": "queued"
+  },
+  {
+    "id": "post-007",
+    "text": "Non sono *troppo.* Ero solo nel posto sbagliato.",
+    "theme": "day",
+    "time_label": "18:40",
+    "caption": "Salvala per quando serve.\n.\n#frasi #frasibelle #pensieri #overthinking #quasiinviato",
+    "publish_at": "2026-11-13T21:00:00+01:00",
+    "status": "queued"
+  },
+  {
+    "id": "post-008",
+    "text": "Di giorno sto bene. È di *notte* che faccio i conti.",
+    "theme": "night",
+    "time_label": "00:58",
+    "caption": "A chi la mandi?\n.\n#frasi #frasibelle #pensieri #overthinking #quasiinviato",
+    "publish_at": "2026-11-14T21:00:00+01:00",
+    "status": "queued"
+  },
+  {
+    "id": "post-009",
+    "text": "Ho smesso di spiegarmi a chi aveva già deciso di non *capirmi.*",
+    "theme": "day",
+    "time_label": "20:30",
+    "caption": "Io, puntata 1.\n.\n#frasi #frasibelle #pensieri #overthinking #quasiinviato",
+    "publish_at": "2026-11-15T21:00:00+01:00",
+    "status": "queued"
+  }
+]

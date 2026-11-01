@@ -1,0 +1,66 @@
+name: Pubblica su Instagram
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"   # ogni 30 minuti controlla se c'è un post da pubblicare
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pubblica
+  cancel-in-progress: false
+
+jobs:
+  pubblica:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Controlla se ci sono post da pubblicare
+        id: due
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json; from datetime import datetime, timezone
+          now = datetime.now(timezone.utc)
+          due = [p for p in json.load(open("posts.json")) if p.get("status") == "queued" and datetime.fromisoformat(p["publish_at"]) <= now]
+          print(f"count={len(due)}")
+          PY
+
+      - name: Scarica i font
+        if: steps.due.outputs.count != '0'
+        run: |
+          mkdir -p fonts
+          curl -sSfL -o fonts/PlayfairDisplay.ttf "https://github.com/google/fonts/raw/main/ofl/playfairdisplay/PlayfairDisplay%5Bwght%5D.ttf"
+          curl -sSfL -o fonts/PlayfairDisplay-Italic.ttf "https://github.com/google/fonts/raw/main/ofl/playfairdisplay/PlayfairDisplay-Italic%5Bwght%5D.ttf"
+          curl -sSfL -o fonts/Inter.ttf "https://github.com/google/fonts/raw/main/ofl/inter/Inter%5Bopsz%2Cwght%5D.ttf"
+
+      - name: Crea le immagini
+        if: steps.due.outputs.count != '0'
+        env:
+          IG_HANDLE: ${{ vars.IG_HANDLE }}
+        run: |
+          pip install --quiet pillow
+          python3 render.py
+          git config user.name "quasiinviato-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add images
+          git diff --cached --quiet || git commit -m "Immagini dei post in uscita"
+          git push
+
+      - name: Pubblica
+        if: steps.due.outputs.count != '0'
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+        run: |
+          export IMAGE_BASE_URL="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/$(git rev-parse HEAD)/images"
+          python3 publish.py
+
+      - name: Salva lo stato dei post
+        if: always() && steps.due.outputs.count != '0'
+        run: |
+          git add posts.json
+          git diff --cached --quiet || git commit -m "Aggiorna lo stato dei post"
+          git push
