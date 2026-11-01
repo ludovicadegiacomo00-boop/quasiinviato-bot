@@ -301,7 +301,7 @@ def render(post):
             draw_frame(text, size_wh=POST_SIZE, time_label=post.get("time_label") if i == 0 else None,
                        counter=f"{i + 1}/{n}", **kw).save(path)
     elif t == "story" and files[0].endswith(".mp4"):
-        render_story_video(post, files[0])
+        render_reel(post, files[0])  # stessa sequenza e stesso suono del Reel
     elif t == "story":
         draw_frame(post["text"], size_wh=TALL_SIZE, time_label=post.get("time_label"), **kw).save(files[0])
     elif t == "reel":
