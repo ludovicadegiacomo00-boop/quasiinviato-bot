@@ -32,7 +32,9 @@ Dopo questi passaggi non devi più fare niente: chiedi a Claude "genera 10 post"
 4. Nella barra della richiesta scrivi `me/accounts?fields=name,access_token,instagram_business_account` e clicca **Invia**.
 5. Nel risultato, sotto "Quasi inviato", trovi:
    - `access_token`: è il **token della Pagina** (non scade) → va in `IG_TOKEN`
-   - `instagram_business_account` → `id`: è l'**id dell'account Instagram** → va in `IG_USER_ID`
+   - `instagram_business_account` → `id`: è l'**id dell'account Instagram** → va in `IG_USER_ID` (non usare l'altro `id`, è quello della Pagina Facebook)
+6. **Verifica prima di salvare**: incolla il token della Pagina nel Debugger (developers.facebook.com/tools/debug/accesstoken). Deve risultare **Scadenza: Mai**. Se c'è una data, hai saltato il passo 2 (estendi il token) e il token morirà dopo poche ore.
+7. Se ti dice che non hai app, accedi a Meta for Developers con l'account Facebook con cui hai creato `quasiinviato-bot` (in incognito, se serve confermare l'identità).
 
 Non incollare il token in chat: mettilo direttamente su GitHub (passo 4).
 
@@ -42,10 +44,10 @@ Nel repository `quasiinviato-bot`: **Settings**, poi **Secrets and variables**, 
 - Ancora **New repository secret**: nome `IG_TOKEN`, valore il token della Pagina.
 - Scheda **Variables**, **New repository variable**: nome `IG_HANDLE`, valore `@quasiinviato`.
 
-Fatto. Ogni 30 minuti GitHub controlla `posts.json` e pubblica i post arrivati alla loro ora.
+Fatto. Ogni 10 minuti GitHub controlla `posts.json` e pubblica i post arrivati alla loro ora.
 
 ## Limiti da sapere
 - Instagram permette al massimo circa 50 post pubblicati via API ogni 24 ore: molto più del necessario.
-- Il tool pubblica foto singole. Caroselli e Reel si possono aggiungere dopo.
+- Il tool pubblica post, caroselli (max 10 slide), storie e Reel.
 - TikTok non è incluso: la pubblicazione automatica pubblica richiede l'approvazione dell'app da parte di TikTok.
 - GitHub può ritardare i controlli programmati di qualche minuto: un post delle 21:00 può uscire alle 21:05-21:30.

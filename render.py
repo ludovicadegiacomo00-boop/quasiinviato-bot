@@ -29,6 +29,12 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 FPS = 30
 SR = 44100
 ROME = ZoneInfo("Europe/Rome")
+GIORNI = ["lunedì", "martedì", "mercoledì", "giovedì", "venerdì", "sabato", "domenica"]
+
+
+def date_label(dt):
+    """Etichetta 'frase del giorno': es. 'martedì, 03.11.2026'."""
+    return f"{GIORNI[dt.weekday()]}, {dt:%d.%m.%Y}"
 
 FONT_CANDIDATES = {
     "serif": ["fonts/PlayfairDisplay.ttf", "/usr/share/fonts/truetype/liberation/LiberationSerif-Regular.ttf"],
@@ -339,7 +345,9 @@ def main():
         for p in todo:
             t = p.get("type") or ("carousel" if p.get("slides") else "post")
             delay = 3 if t == "reel" or (t == "story" and p.get("format") != "image") else 2 if t == "carousel" else 1
-            p["time_label"] = (datetime.now(ROME) + timedelta(minutes=delay)).strftime("%H:%M")
+            at = datetime.now(ROME) + timedelta(minutes=delay)
+            # "label": "date" = frase del giorno: al posto dell'orario compare il giorno con la data
+            p["time_label"] = date_label(at) if p.get("label") == "date" else at.strftime("%H:%M")
         with open(os.path.join(HERE, ".due"), "w") as f:
             f.write(",".join(p["id"] for p in todo))
     else:

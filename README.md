@@ -1,10 +1,10 @@
 # quasiinviato-bot
 
-Pubblica in automatico su Instagram i post di Quasi inviato.
+Pubblica in automatico su Instagram i contenuti di Quasi inviato (post, caroselli, storie e Reel).
 
-- `posts.json`: la coda dei post (testo con *parola* evidenziata, tema day/night, orario finto, didascalia, data di uscita, stato).
-- `render.py`: crea le immagini 1080×1350 nello stile del brand.
-- `publish.py`: pubblica con l'API ufficiale di Instagram i post arrivati alla loro ora.
-- `.github/workflows/pubblica.yml`: esegue tutto ogni 30 minuti, gratis, su GitHub Actions.
+- `posts.json`: la coda (testo con *parola* evidenziata, tipo, didascalia, data di uscita, stato; `label: "date"` per la frase del giorno).
+- `render.py`: crea immagini e video nello stile del brand (post e caroselli 1080×1350, storie e Reel 1080×1920).
+- `publish.py`: pubblica con l'API ufficiale di Instagram i contenuti arrivati alla loro ora.
+- `.github/workflows/pubblica.yml`: esegue tutto ogni 10 minuti, gratis, su GitHub Actions.
 
-Configurazione: vedi `CONFIGURAZIONE.md`.
+Configurazione: vedi `CONFIGURAZIONE.md`. Istruzioni per Claude e scaletta settimanale: `CLAUDE.md`.
