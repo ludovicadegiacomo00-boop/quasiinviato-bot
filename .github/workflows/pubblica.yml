@@ -2,7 +2,7 @@ name: Pubblica su Instagram
 
 on:
   schedule:
-    - cron: "*/10 * * * *"   # ogni 10 minuti controlla se c'è un post da pubblicare
+    - cron: "*/5 * * * *"   # riserva: GitHub ritarda spesso i cron, il lancio affidabile è cron-job.org (vedi CLAUDE.md)
   workflow_dispatch:
     inputs:
       prova:

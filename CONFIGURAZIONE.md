@@ -44,7 +44,7 @@ Nel repository `quasiinviato-bot`: **Settings**, poi **Secrets and variables**, 
 - Ancora **New repository secret**: nome `IG_TOKEN`, valore il token della Pagina.
 - Scheda **Variables**, **New repository variable**: nome `IG_HANDLE`, valore `@quasiinviato`.
 
-Fatto. Ogni 10 minuti GitHub controlla `posts.json` e pubblica i post arrivati alla loro ora.
+Fatto. Ogni 5 minuti (da cron-job.org, con il cron di GitHub come riserva) il workflow controlla `posts.json` e pubblica i post arrivati alla loro ora.
 
 ## Limiti da sapere
 - Instagram permette al massimo circa 50 post pubblicati via API ogni 24 ore: molto più del necessario.

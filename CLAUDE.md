@@ -15,7 +15,8 @@ Logo: tre puntini "sta scrivendo…", il terzo arancio. Rispondi sempre in **ita
 - `label: "date"`: al posto dell'orario in alto a sinistra compare il giorno con la data (es. `martedì, 03.11.2026`). Vale solo per quel post.
 - `render.py --due` genera le immagini/video dei post in scadenza (scacchiera crema/nero automatica per post, Reel e caroselli; le storie hanno il `theme` scritto in coda; orario = ora reale di uscita).
 - `publish.py` pubblica tramite Instagram Graph API (in parallelo, max 5 per esecuzione).
-- `.github/workflows/pubblica.yml` gira su GitHub Actions (cron ogni 10 min + avvio manuale; input `prova` per testare senza pubblicare).
+- `.github/workflows/pubblica.yml` gira su GitHub Actions (avvio manuale; input `prova` per testare senza pubblicare).
+- **Lancio automatico:** il cron di GitHub è inaffidabile (il 2 novembre ha saltato ore intere). Il lancio affidabile è un job su cron-job.org ogni 5 minuti che chiama `POST https://api.github.com/repos/ludovicadegiacomo00-boop/quasiinviato-bot/actions/workflows/pubblica.yml/dispatches` con body `{"ref":"main"}` e un token GitHub fine-grained (solo repo `quasiinviato-bot`, permesso Actions: read/write). Il token è salvato solo su cron-job.org e **scade dopo 1 anno (ricordare di rinnovarlo a ottobre 2027)**. Il cron di GitHub (`*/5`) resta come riserva; `concurrency` evita doppie pubblicazioni. Se i post non escono: controllare lo storico del job su cron-job.org (deve rispondere 204).
 - Secrets su GitHub: `IG_USER_ID`, `IG_TOKEN` (token **di Pagina**, non scade: nel Debugger dei token deve risultare "Scadenza: Mai"); variabile `IG_HANDLE`. Guida: `CONFIGURAZIONE.md`.
 - GitHub CLI installato (`C:\Program Files\GitHub CLI\gh.exe`, login già fatto): si può lanciare il workflow con `gh workflow run pubblica.yml -R ludovicadegiacomo00-boop/quasiinviato-bot`. Il token di `gh` sta nel sistema, mai nei file.
 
