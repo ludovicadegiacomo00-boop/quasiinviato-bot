@@ -167,7 +167,9 @@
     "label": "date",
     "caption": "Il martedì è il giorno in cui la motivazione del lunedì ha già salutato. 🫠\n\nTu stai continuando?\n\n💾 Salvala per quando ti serve.\n.\n.\n#frasedelgiorno #buongiorno #frasi #pensieri #quasiinviato",
     "publish_at": "2026-11-03T10:30:00+01:00",
-    "status": "queued"
+    "status": "queued",
+    "theme": "night",
+    "time_label": "lunedì, 02.11.2026"
   },
   {
     "id": "reel-1103-1300",
@@ -257,7 +259,9 @@
     ],
     "caption": "Ogni segno ha il suo modo di non mandare un messaggio. ♈♉♊\n\nIl tuo è tra questi? Dimmelo qui sotto 👇\n\n📩 Mandalo a chi si riconosce.\n.\n.\n#oroscopo #segnizodiacali #zodiaco #astrologia #quasiinviato",
     "publish_at": "2026-11-04T22:30:00+01:00",
-    "status": "queued"
+    "status": "queued",
+    "theme": "day",
+    "time_label": "22:50"
   },
   {
     "id": "story-1105",
