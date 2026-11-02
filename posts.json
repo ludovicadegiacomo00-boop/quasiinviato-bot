@@ -86,7 +86,7 @@
     "text": "Buongiorno. Oggi quel messaggio lo scrivi. O almeno *quasi.*",
     "publish_at": "2026-11-02T10:00:00+01:00",
     "status": "queued",
-    "time_label": "10:44",
+    "time_label": "13:04",
     "thumb_offset": 2833,
     "last_error": "Errore Instagram 400: {\"error\":{\"message\":\"Error validating access token: Session has expired on Sunday, 01-Nov-26 16:00:00 PST. The current time is Monday, 02-Nov-26 01:41:49 PST.\",\"type\":\"OAuthException\",\"code\":190,\"error_subcode\":463,\"fbtrace_id\":\"A8hfEA5KDvo_j99IJ4_U8-D\"}}"
   },
@@ -94,7 +94,7 @@
     "id": "post-002",
     "text": "Sto scrivendo da dieci minuti. Ti mando solo *ok.*",
     "theme": "night",
-    "time_label": "02:14",
+    "time_label": "13:02",
     "caption": "Dieci minuti a scrivere. Due lettere inviate. 🫠\n\nC'è sempre un messaggio lungo che muore in un \"ok\".\nTu cosa stavi per scrivere davvero?\n\n👉 Mandalo a chi ti risponde sempre ok.\n.\n.\n#frasidamore #amore #exfidanzato #mimanchi #quasiinviato #frasi",
     "publish_at": "2026-11-02T13:00:00+01:00",
     "status": "queued"
