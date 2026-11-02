@@ -85,7 +85,9 @@
     "theme": "day",
     "text": "Buongiorno. Oggi quel messaggio lo scrivi. O almeno *quasi.*",
     "publish_at": "2026-11-02T10:00:00+01:00",
-    "status": "queued"
+    "status": "queued",
+    "time_label": "10:04",
+    "thumb_offset": 2833
   },
   {
     "id": "post-002",
