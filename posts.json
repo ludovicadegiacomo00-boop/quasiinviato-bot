@@ -85,10 +85,11 @@
     "theme": "day",
     "text": "Buongiorno. Oggi quel messaggio lo scrivi. O almeno *quasi.*",
     "publish_at": "2026-11-02T10:00:00+01:00",
-    "status": "queued",
+    "status": "published",
     "time_label": "22:14",
     "thumb_offset": 2833,
-    "last_error": "Errore Instagram 400: {\"error\":{\"message\":\"Error validating access token: Session has expired on Sunday, 01-Nov-26 16:00:00 PST. The current time is Monday, 02-Nov-26 11:51:20 PST.\",\"type\":\"OAuthException\",\"code\":190,\"error_subcode\":463,\"fbtrace_id\":\"A7VfNPzoitgcdmrWJo7EueX\"}}"
+    "media_id": "18073260872775636",
+    "published_at": "2026-11-02T21:12:38+00:00"
   },
   {
     "id": "post-002",
@@ -97,8 +98,9 @@
     "time_label": "22:12",
     "caption": "Dieci minuti a scrivere. Due lettere inviate. 🫠\n\nC'è sempre un messaggio lungo che muore in un \"ok\".\nTu cosa stavi per scrivere davvero?\n\n👉 Mandalo a chi ti risponde sempre ok.\n.\n.\n#frasidamore #amore #exfidanzato #mimanchi #quasiinviato #frasi",
     "publish_at": "2026-11-02T13:00:00+01:00",
-    "status": "queued",
-    "last_error": "Errore Instagram 400: {\"error\":{\"message\":\"Error validating access token: Session has expired on Sunday, 01-Nov-26 16:00:00 PST. The current time is Monday, 02-Nov-26 11:51:20 PST.\",\"type\":\"OAuthException\",\"code\":190,\"error_subcode\":463,\"fbtrace_id\":\"Azw9tEAIqXATIcXciL7ABjT\"}}"
+    "status": "published",
+    "media_id": "18119758498795297",
+    "published_at": "2026-11-02T21:12:38+00:00"
   },
   {
     "id": "post-003",
@@ -107,8 +109,9 @@
     "time_label": "22:12",
     "caption": "La felpa era solo una scusa. Lo sappiamo tutti.\n\nQuanti messaggi iniziano con una cosa e ne vogliono dire un'altra?\n\n💾 Salvala per quando ti manca il coraggio.\n👇 Scrivi nei commenti la tua \"scusa\" preferita.\n.\n.\n#frasidamore #amore #exfidanzato #mimanchi #quasiinviato #frasi",
     "publish_at": "2026-11-02T18:00:00+01:00",
-    "status": "queued",
-    "last_error": "Errore Instagram 400: {\"error\":{\"message\":\"Error validating access token: Session has expired on Sunday, 01-Nov-26 16:00:00 PST. The current time is Monday, 02-Nov-26 11:51:20 PST.\",\"type\":\"OAuthException\",\"code\":190,\"error_subcode\":463,\"fbtrace_id\":\"AKzSOYR-eVNlPRMQXnkll72\"}}"
+    "status": "published",
+    "media_id": "18231657751334501",
+    "published_at": "2026-11-02T21:12:38+00:00"
   },
   {
     "id": "reel-0211a",
@@ -116,11 +119,12 @@
     "text": "Ho riletto la nostra chat. Ho sempre scritto io *per prima.*",
     "caption": "Scorri la chat fino in fondo e te ne accorgi: eri sempre tu a cominciare. 🫠\n\nGuarda fino alla fine: questo non l'ho mandato.\n\n👇 Team \"scrivo io per prima\" o team \"aspetto\"?\n📩 Mandalo a chi deve leggerlo.\n.\n.\n#frasidamore #amore #mimanchi #frasi #frasibelle #quasiinviato",
     "publish_at": "2026-11-02T19:30:00+01:00",
-    "status": "queued",
+    "status": "published",
     "theme": "night",
     "time_label": "22:14",
     "thumb_offset": 2833,
-    "last_error": "Errore Instagram 400: {\"error\":{\"message\":\"Error validating access token: Session has expired on Sunday, 01-Nov-26 16:00:00 PST. The current time is Monday, 02-Nov-26 11:51:20 PST.\",\"type\":\"OAuthException\",\"code\":190,\"error_subcode\":463,\"fbtrace_id\":\"AGSernI9ASVAnnq7TfTI_mV\"}}"
+    "media_id": "18214045564365014",
+    "published_at": "2026-11-02T21:12:38+00:00"
   },
   {
     "id": "post-010",
@@ -137,7 +141,9 @@
     ],
     "caption": "5 lezioni che nessuno ti spiega. Le capisci solo quando è tardi. ⏳\n\nScorri fino all'ultima: è quella che fa più male.\nQuale ti è arrivata di più? Scrivi il numero 👇\n\n💾 Salvalo: un giorno ti servirà.\n.\n.\n#autostima #crescitapersonale #amorproprio #frasimotivazionali #quasiinviato #frasi",
     "publish_at": "2026-11-02T21:00:00+01:00",
-    "status": "queued"
+    "status": "published",
+    "media_id": "18112069898270059",
+    "published_at": "2026-11-02T21:13:16+00:00"
   },
   {
     "id": "reel-0211b",
