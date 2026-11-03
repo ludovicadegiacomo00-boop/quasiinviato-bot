@@ -164,7 +164,9 @@
     "theme": "day",
     "text": "Ultima cosa che hai scritto e *cancellato?* Rispondi qui. Le migliori diventano post (anonime).",
     "publish_at": "2026-11-03T09:30:00+01:00",
-    "status": "queued"
+    "status": "queued",
+    "time_label": "09:35",
+    "thumb_offset": 4000
   },
   {
     "id": "giorno-1103",
