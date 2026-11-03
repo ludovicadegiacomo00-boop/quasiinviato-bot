@@ -15,10 +15,21 @@ Logo: tre puntini "sta scrivendo…", il terzo arancio. Rispondi sempre in **ita
 - `label: "date"`: al posto dell'orario in alto a sinistra compare il giorno con la data (es. `martedì, 03.11.2026`). Vale solo per quel post.
 - `render.py --due` genera le immagini/video dei post in scadenza (scacchiera crema/nero automatica per post, Reel e caroselli; le storie hanno il `theme` scritto in coda; orario = ora reale di uscita).
 - `publish.py` pubblica tramite Instagram Graph API (in parallelo, max 5 per esecuzione).
+- `aggiungi.py` aggiunge un contenuto alla coda con i controlli giusti; `unisci_posts.py` (chiamato dal workflow a ogni esecuzione) porta su `main` i rami `claude/*` creati dalle sessioni cloud.
 - `.github/workflows/pubblica.yml` gira su GitHub Actions (avvio manuale; input `prova` per testare senza pubblicare).
 - **Lancio automatico:** il cron di GitHub è inaffidabile (il 2 novembre ha saltato ore intere). Il lancio affidabile è un job su cron-job.org ogni 5 minuti che chiama `POST https://api.github.com/repos/ludovicadegiacomo00-boop/quasiinviato-bot/actions/workflows/pubblica.yml/dispatches` con body `{"ref":"main"}` e un token GitHub fine-grained (solo repo `quasiinviato-bot`, permesso Actions: read/write). Il token è salvato solo su cron-job.org e **scade dopo 1 anno (ricordare di rinnovarlo a ottobre 2027)**. Il cron di GitHub (`*/5`) resta come riserva; `concurrency` evita doppie pubblicazioni. Se i post non escono: controllare lo storico del job su cron-job.org (deve rispondere 204).
 - Secrets su GitHub: `IG_USER_ID`, `IG_TOKEN` (token **di Pagina**, non scade: nel Debugger dei token deve risultare "Scadenza: Mai"); variabile `IG_HANDLE`. Guida: `CONFIGURAZIONE.md`.
 - GitHub CLI installato (`C:\Program Files\GitHub CLI\gh.exe`, login già fatto): si può lanciare il workflow con `gh workflow run pubblica.yml -R ludovicadegiacomo00-boop/quasiinviato-bot`. Il token di `gh` sta nel sistema, mai nei file.
+
+## Richieste da telefono o da Claude Desktop (sessioni cloud)
+Ludovica può chiedere da telefono, nell'app di Claude (scheda **Code**, repository `quasiinviato-bot`), di pubblicare una frase o qualunque contenuto, subito o a un'ora scelta. Non serve il PC.
+1. Scrivi il contenuto (rispetta brand, temi e tono sotto). Se è una frase di una follower, chiedi se va anonima.
+2. Aggiungilo con `aggiungi.py` (controlla formato, didascalia, orario; non modificare `posts.json` a mano):
+   `python3 aggiungi.py post --testo "..." --caption "..." --quando ora` (tipi: `post`, `reel`, `storia`, `carosello` con più `--slide`; `--quando` = `ora`, `HH:MM` oppure `AAAA-MM-GG HH:MM` in ora di Roma; `--giorno` per la frase del giorno con la data in alto).
+   Se Ludovica non indica un orario, "pubblica" = `--quando ora`. Per un contenuto da programmare, controlla che non cada sullo stesso orario di uno già in coda.
+3. Fai commit e push del ramo della sessione (**non aprire pull request**): il workflow unisce da solo il ramo `claude/*` a `main`, **solo se tocca soltanto `posts.json`**, e pubblica entro 5 minuti dall'orario. Se tocchi altri file, il ramo non viene unito: dillo a Ludovica.
+4. Rispondi con id, giorno e ora di uscita. Per sapere se è uscito: `posts.json` su `main` mostra `status: published`.
+Il PC può restare spento. Non servono token: il token Instagram è già nei secrets di GitHub.
 
 ## "Genera N post"
 Quando Ludovica chiede di generare post: scrivi frasi originali, in prima persona, specifiche, con didascalia accattivante (hook + domanda/CTA + 3-5 hashtag di nicchia), aggiungile a `posts.json` senza sovrapporre orari, poi commit e push su `main` (prima `git pull`: il workflow committa lo stato dei post).

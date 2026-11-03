@@ -3,6 +3,8 @@ name: Pubblica su Instagram
 on:
   schedule:
     - cron: "*/5 * * * *"   # riserva: GitHub ritarda spesso i cron, il lancio affidabile è cron-job.org (vedi CLAUDE.md)
+  push:
+    branches: ["claude/**"]   # modifiche fatte da telefono (app di Claude, scheda Code): vengono unite a main qui sotto
   workflow_dispatch:
     inputs:
       prova:
@@ -22,6 +24,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Unisci le modifiche fatte dal telefono
+        run: |
+          git config user.name "quasiinviato-bot"
+          git config user.email "bot@users.noreply.github.com"
+          python3 unisci_posts.py
 
       - name: Controlla se ci sono post da pubblicare
         id: due
@@ -58,7 +69,7 @@ jobs:
           git config user.email "bot@users.noreply.github.com"
           git add images posts.json
           git diff --cached --quiet || git commit -m "Immagini dei post in uscita"
-          git push
+          git pull --rebase -q origin main && git push
 
       - name: Pubblica
         if: steps.due.outputs.count != '0'
@@ -75,4 +86,4 @@ jobs:
         run: |
           git add posts.json
           git diff --cached --quiet || git commit -m "Aggiorna lo stato dei post"
-          git push
+          git pull --rebase -q origin main && git push
