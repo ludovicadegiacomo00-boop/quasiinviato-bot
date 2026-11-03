@@ -224,14 +224,18 @@
     "text": "Ti ho risposto. Poi ho cancellato. Perché non meriti chi scrive e cancella: meriti qualcuno che scrive e *aspetta.*",
     "caption": "Questa ce l'avete scritta voi, rispondendo alla storia di stamattina. 🧡\n\nChi ti ha mai aspettato davvero?\n\n✍️ Mandaci il tuo messaggio mai inviato: i migliori diventano post (anonimi).\n🏷️ Tagga chi scrive e aspetta.\n.\n.\n#levostrefrasi #frasi #frasidamore #messaggi #quasiinviato",
     "publish_at": "2026-11-03T20:30:00+01:00",
-    "status": "queued"
+    "status": "queued",
+    "theme": "day",
+    "time_label": "20:32"
   },
   {
     "id": "story-vostre-1103",
     "type": "story",
     "text": "Ti ho risposto. Poi ho cancellato. Perché non meriti chi scrive e cancella: meriti qualcuno che scrive e *aspetta.*",
     "publish_at": "2026-11-03T20:30:00+01:00",
-    "status": "queued"
+    "status": "queued",
+    "time_label": "20:34",
+    "thumb_offset": 4666
   },
   {
     "id": "carosello-1103",
