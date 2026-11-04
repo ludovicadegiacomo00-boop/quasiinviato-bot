@@ -265,7 +265,9 @@
     "theme": "night",
     "text": "Una parola per descrivere come stai oggi. Senza *pensarci.*",
     "publish_at": "2026-11-04T09:30:00+01:00",
-    "status": "queued"
+    "status": "queued",
+    "time_label": "09:34",
+    "thumb_offset": 2800
   },
   {
     "id": "giorno-1104",
